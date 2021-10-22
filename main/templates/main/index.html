@@ -1,0 +1,56 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+{% block title %}GLC-Tasks{% endblock title %}
+
+{% block body %}
+<br/>
+
+<div class="container-fluid">
+
+<div class="row ml-5 mr-5">
+
+	<div class="col-sm-3 pr-5">
+
+		<a data-toggle="modal" data-target="#add" style="cursor:pointer;">
+		<button class="btn btn-light btn-md" style="border-radius: 20px; width:100%">Add category</button>
+		</a><br/><br/>
+		
+		{% if categories %}
+		{% for category in categories %}
+		<div style="border-bottom:1px solid white" class="mb-3 toshowsideact">
+		<a href="{% url 'main:category' category.id %}" style="font-size:20px; color:white; text-decoration:none; text-transform:capitalize;">{{category.name}}</a> <small class="ml-auto" style="display:inline-flex;">&#8811</small>
+		</div>
+		{% endfor %}
+		{% else %}
+		<div class="container" style="border: 1px dashed #595959; border-radius:20px; height:400px; display:table"><p style="font-size:24px; display: table-cell; vertical-align: middle; color:#595959">New categories will appear here</div>
+		{% endif %}
+	
+	</div>
+
+	<div class="col-sm-9 sborder">
+			{% if categories %}
+		<div class="row widgets">
+		{% for category in categories %}
+
+		<div class="col-sm-6 pt-1 pb-3" style="text-align:center;">
+			<a href="{% url 'main:category' category.id %}" style="text-decoration: none;">
+			<div class="ml-0 mr-0 pt-3 pb-3" style="background-color:#404040; color:white; text-transform: uppercase;">{{category.name}}</div></a>
+		</div>
+		{% endfor %}
+		</div>
+	<hr class="border-light ml-1 mr-1"/>
+
+	{% for task in tasks %}
+	<p> - <b style="text-transform: uppercase;">({{task.category.name}}):</b> {{task.name}}</p>
+	{% endfor %}
+	</div>
+
+	{% else %}
+	<div style="text-align: center; margin-top:100px">
+	<img src="{% static 'soempty.png' %}" width="85px">
+</div>
+	{% endif %}
+</div>
+</div>
+{% endblock body %}

@@ -1,0 +1,12 @@
+{% extends "main/base.html" %}
+
+{% block title %}GLC - 500{% endblock title %}
+{% block body %}
+<div class="container mt-5">
+<h1 style="font-size:40px">:(</h1>
+<h1>500 ERROR</h1>
+<p>A 500 error has ocurred, that means something serve-side has gone wrong!</p>
+<p>Return to the main page: </p>
+<a href="{% url 'main:index' %}">Here</a>
+</div>
+{% endblock body %}

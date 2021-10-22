@@ -1,0 +1,21 @@
+{% extends "main/base.html" %}
+
+{% block title %}GLC: Log In{% endblock title %}
+
+{% block body %}
+
+<div class="container  mt-5">
+	<div class="h-100 justify-align-items-center" style="text-align:center;">
+	<h2>Log In</h2>
+	<p><i>Welcome back!</i></p>
+<form class=" mt-5" method="post" action="{% url 'users:login' %}" style="text-align: center; margin:0 auto;
+ width:300px;">
+	{% csrf_token %}
+	<label for="username">USERNAME</label>
+	<input class="form-control mb-3" type="text" placeholder="Username" name="username">
+	<label for="password">PASSWORD</label>
+	<input class="form-control mb-5" type="password" placeholder="Password" name="password">
+	<button class="btn btn-light btn-md" style="border-radius: 10px;" type="submit">Login</button>
+</form>
+</div></div>
+{% endblock body %}

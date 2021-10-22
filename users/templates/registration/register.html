@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+
+{% block title %}GLC: Register{% endblock title %}
+
+{% block body %}
+
+<div class="container  mt-5">
+	<div class="h-100 justify-align-items-center" style="text-align:center;">
+	<h2>Register</h2>
+	<p><i>Start with your organized journey!</i></p>
+<form class=" mt-5" method="post" action="{% url 'users:register' %}" style="text-align: center; margin:0 auto;
+ width:300px;">
+	{% csrf_token %}
+	<label for="username">USERNAME</label>
+	<input class="form-control mb-3" type="text" placeholder="Username" name="username">
+	<label for="password">PASSWORD</label><br/>
+	<small><i>For security purposes, we are forced to ask you for a "strong" password 8+ characters, not easy to guess, or similar to your username.</i></small>
+	<input class="form-control mb-5" type="password" placeholder="Password" name="password1">
+	<label for="password">REPEAT YOUR PASSWORD</label>
+	<input class="form-control mb-5" type="password" placeholder="Password" name="password2">
+	<button class="btn btn-light btn-md" style="border-radius: 10px;" type="submit">Sign Up</button>
+</form>
+</div></div>
+{% endblock body %}

@@ -1,0 +1,13 @@
+{% extends "main/base.html" %}
+
+{% block title %} GLT 0 ADd acategory{% endblock title %}
+
+{% block body %}
+<h1>Add category</h1>
+<form method="post" action="{% url 'main:add_category' %}">{% csrf_token %}
+<p>Logged in user: {{request.user}}</p>
+<input type="text" name="categoryName" placeholder="Name..."/>
+
+<button type="submit">Add</button>
+</form>
+{% endblock body %}

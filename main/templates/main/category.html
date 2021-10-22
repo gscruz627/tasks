@@ -1,0 +1,163 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %}GLC: {{category.name}}{% endblock title %}
+
+{% block body %}
+
+<br/>
+
+<div class="container-fluid">
+
+<div class="row ml-5 mr-5">
+
+	<!--First segment, side menu, displays categories-->
+	<div class="col-sm-3 pr-5">
+
+		<a data-toggle="modal" data-target="#add" style="cursor:pointer;">
+		<button class="btn btn-light btn-md" style="border-radius: 20px; width:100%">Add category</button>
+		</a><br/><br/>
+		{% for general_category in categories %}
+		{% if general_category == category %}
+
+		<div style="border-bottom:1px solid white" class="mb-3 toshowsideact">
+		
+		<b>
+			<a href="{% url 'main:category' category.id %}" style="font-size:20px; color:white;text-decoration:none; text-transform: uppercase;">{{category.name}}</a>
+		</b> 
+
+		<small class="ml-auto" style="display:inline-flex;">&#8811</small>
+		
+		</div>		
+		
+		{% else %}
+		
+		<div style="border-bottom:1px solid white" class="mb-3 toshowsideact">
+		
+		<a href="{% url 'main:category' general_category.id %}" style="font-size:20px; color:white; text-decoration:none; text-transform:capitalize;">{{general_category.name}}</a>
+		<small class="ml-auto" style="display:inline-flex;">&#8811</small>
+		
+		</div>
+		
+		{% endif %}
+		{% endfor %}
+	
+	</div>
+
+	<div class="col-sm-9 sborder">
+		
+	<form method="post" action="{% url 'main:add_task' category.id %}">
+		{% csrf_token %}
+	    <div class="input-group">
+            <input type="text" class="form-control text-light" style="background-color: #2A2A2A; border-color:#595959" name="new_task" placeholder="Add new task..." />
+            <span class="input-group-addon">
+            <button type="submit" class="btn btn-light" style="border-top-left-radius: 0; border-bottom-left-radius:0">ADD</button>
+            </span>
+        </div>
+	</button>
+	</form>
+
+	<b>
+		<h2 class="mt-3 mb-3" style="text-transform: uppercase; display:inline-block;">{{category.name}}
+		</h2>
+	</b>
+
+	<!--Icon for delete this category-->
+	 <a style="font-size:25px; color:#6D6D6D; cursor:pointer" data-toggle="modal" data-target="#delete">
+	 	<i class="bi bi-trash"></i>
+	 </a>
+	
+	<!--Icon for edit the name of the category-->
+	 <a style="font-size:25px; color:#FFFF99; cursor:pointer" data-toggle="modal" data-target="#edit">
+	 	<i class="bi bi-pencil-square"></i>
+	 </a>
+
+	<div class="ml-5">
+	{% if tasks %}
+		{% for task in tasks %}
+		{% if task.active %}
+		<p> - <
+			<a href="{% url 'main:mark_task' task.id %}" style="color:green; text-decoration: none; 	font-size:20px">&#10004;</a>>
+			{{task.name}}
+			<a style="float:right; color:red"href="{% url 'main:delete_task' task.id %}" style="color:red; 	text-decoration: none; font-size:20px">&#10006;</a>
+		</p>
+		{% endif %}
+		{% endfor %}
+	{% else %}
+	<div style="text-align: center; margin-top:100px">
+	<img src="{% static 'soempty.png' %}" width="85" style="text-align: center;">
+	{% endif %}
+
+	</div>
+
+	{% if tasks %}
+	<h5 style="display:inline-block;">Completed</h5> (<a style="color: white;" href="{% url 'main:delete_all_tasks' category.id %}"> All &#10006;</a>)
+
+	<div class="ml-5">
+		<div style="display:block; " id="completed_tasks" >
+			{% for task in tasks %}
+			{% if not task.active %}
+		<p> - <
+		<a href="{% url 'main:mark_task' task.id %}" style="color:skyblue; text-decoration: none; font-size:20px">&#8634;</a>>
+		<del>{{task.name}}</del>
+		<a style="float:right; color:red"href="{% url 'main:delete_task' task.id %}" style="color:red; text-decoration: none; font-size:20px">&#10006;</a>
+		</p>
+			{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+	{% endif %}
+</div>
+
+<div class="modal fade" role="dialog" id="edit">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+	<div class="modal-content" style="background-color:#2D2D2D">
+		<div class="modal-header">
+			<h5>Edit this Category</h5>
+			<button type="button" class="close" data-dismiss="modal">
+				<span aria-hidden="true" style="color:white;">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			<form method="POST" action="{% url 'main:edit_category' category.id%}"> {% csrf_token %}
+								<label for="thisnewname">New Name:</label>
+				<div class="input-group">
+				<input  style="color: white; background-color:#2A2A2A; border-color: #595959;"type="text" placeholder="Type the new name..." name="newName" class="form-control" id="thisnewname">
+				<span class="input-group-addon">
+				<button type="submit" style="border-top-left-radius: 0; border-bottom-left-radius: 0;"class="btn btn-light">Change</button>
+				</span>
+				</div>
+			</form>
+		</div>
+	</div>
+	</div>
+</div>
+
+<div class="modal fade" role="dialog" id="delete">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+	<div class="modal-content" style="background-color:#2D2D2D">
+		<div class="modal-header">
+			<h5>Delete confirmation</h5>
+			<button type="button" class="close" data-dismiss="modal">
+				<span aria-hidden="true" style="color:white;">&times;</span>
+			</button>
+		</div>
+		<div class="modal-body">
+			This category will be removed and never recovered
+		</div>
+		<div class="modal-footer">
+			<a href="{% url 'main:delete_category' category.id %}">
+				<button class="btn btn-light">Ok</button>
+			</a>
+			<a data-dismiss="modal" style="cursor:pointer">
+				Cancel
+			</a>
+		</div>
+	</div>
+	</div>
+</div>
+<script>
+$(document).ready(function(){
+    $('[data-toggle="popover"]').popover({html:true});   
+});
+</script>
+{% endblock body %}

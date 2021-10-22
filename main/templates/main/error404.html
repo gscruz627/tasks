@@ -1,0 +1,18 @@
+{% extends "main/base.html" %}
+
+{% block title %}GLC - 404{% endblock title %}
+{% block body %}
+<div class="container mt-5">
+<h1 style="font-size:40px">:(</h1>
+<h1>404 ERROR</h1>
+<p>A 404 error has ocurred, that means the page you are looking for could not be loaded</p>
+<p>Dont't worry, a few reasons why this has happened might be:</p>
+<ul>
+	<li>- Mistyped words, make sure you have the right URL address!!</li>
+	<li>- You DON'T have permission to see this page</li>
+	<li>- The address you were looking does not exist</li>
+</ul>
+<p>Return to the main page: </p>
+<a href="{% url 'main:index' %}">Here</a>
+</div>
+{% endblock body %}

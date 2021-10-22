@@ -1,0 +1,24 @@
+{% extends "main/base.html" %}
+{% load static %}
+{% block title %}GLC: Welcome!{% endblock title %}
+
+{% block body %}
+
+<div class="jumbotron container mt-5" style="background-color: #3F3F3F; text-align:center">
+	<h1 class="card-title">GLC-Tasks</h1>
+	<p class="lead">Start building your organized journey</p>
+	<p>Focus on work or other activities in the most organized way</p>
+	<hr class="border-light"/>
+	<form class="mb-3 mt-3" style="width:300px; margin:0 auto" action="{% url 'users:register' %}">
+	<input class="form-control" placeholder="Add a new task" style="background-color: #434343; color:white">
+	<button type="submit" class="btn btn-sm mt-3" style="background-color: #EFEFEF;">Register to Add</button>
+	<input type="hidden" name="next" value="{% url 'users:register' %}">
+	</form>
+</div>
+
+<div class="container mb-5" style="text-align: center;">
+<h2>Take a look before!</h2>
+<img width="100%" style="border-radius: 10px"class="border mb-3" src="{% static 'welcome.png' %}">
+<img width="100%" style="border-radius: 10px"class="border" src="{% static 'elcome_cat.png' %}">
+</div>
+{% endblock body %}
