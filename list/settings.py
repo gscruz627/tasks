@@ -147,3 +147,8 @@ LOGIN_REDIRECT_URL = "main:index"
 LOGOUT_REDIRECT_URL = "main:welcome"
 
 django_heroku.settings(locals())
+
+if os.environ('DEBUG') == 'TRUE':
+    DEBUG = True
+else if os.environ('DEBUG') == 'FALSE':
+    DEBUG = False
