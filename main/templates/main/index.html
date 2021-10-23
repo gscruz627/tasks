@@ -8,9 +8,9 @@
 
 <div class="container-fluid">
 
-<div class="row ml-5 mr-5">
+ <div class="row ml-lg-5 mr-lg-5">
 
-	<div class="col-sm-3 pr-5">
+  <div class="col-sm-3 pr-lg-5">
 
 		<a data-toggle="modal" data-target="#add" style="cursor:pointer;">
 		<button class="btn btn-light btn-md" style="border-radius: 20px; width:100%">Add category</button>
@@ -42,7 +42,9 @@
 	<hr class="border-light ml-1 mr-1"/>
 
 	{% for task in tasks %}
+	<div style="word-wrap:break-word;">
 	<p> - <b style="text-transform: uppercase;">({{task.category.name}}):</b> {{task.name}}</p>
+	</div>
 	{% endfor %}
 	</div>
 

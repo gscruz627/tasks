@@ -8,10 +8,10 @@
 
 <div class="container-fluid">
 
-<div class="row ml-5 mr-5">
+<div class="row ml-lg-5 mr-lg-5">
 
 	<!--First segment, side menu, displays categories-->
-	<div class="col-sm-3 pr-5">
+	<div class="col-sm-3 pr-lg-5">
 
 		<a data-toggle="modal" data-target="#add" style="cursor:pointer;">
 		<button class="btn btn-light btn-md" style="border-radius: 20px; width:100%">Add category</button>
@@ -71,15 +71,17 @@
 	 	<i class="bi bi-pencil-square"></i>
 	 </a>
 
-	<div class="ml-5">
+	<div class="ml-lg-5">
 	{% if tasks %}
 		{% for task in tasks %}
 		{% if task.active %}
+		<div style="width: 100%; word-wrap: break-word;">
 		<p> - <
 			<a href="{% url 'main:mark_task' task.id %}" style="color:green; text-decoration: none; 	font-size:20px">&#10004;</a>>
 			{{task.name}}
 			<a style="float:right; color:red"href="{% url 'main:delete_task' task.id %}" style="color:red; 	text-decoration: none; font-size:20px">&#10006;</a>
 		</p>
+	</div>
 		{% endif %}
 		{% endfor %}
 	{% else %}
@@ -92,13 +94,13 @@
 	{% if tasks %}
 	<h5 style="display:inline-block;">Completed</h5> (<a style="color: white;" href="{% url 'main:delete_all_tasks' category.id %}"> All &#10006;</a>)
 
-	<div class="ml-5">
+	<div class="ml-lg-5">
 		<div style="display:block; " id="completed_tasks" >
 			{% for task in tasks %}
 			{% if not task.active %}
 		<p> - <
 		<a href="{% url 'main:mark_task' task.id %}" style="color:skyblue; text-decoration: none; font-size:20px">&#8634;</a>>
-		<del>{{task.name}}</del>
+		<del>{{task.name|wordwrap:10}}</del>
 		<a style="float:right; color:red"href="{% url 'main:delete_task' task.id %}" style="color:red; text-decoration: none; font-size:20px">&#10006;</a>
 		</p>
 			{% endif %}
