@@ -24,6 +24,3 @@ urlpatterns = [
     path('', include("main.urls")),
     path('', include("users.urls")),
 ] + static(settings.STATIC_URL)
-
-handler404 = "main.views.error404"
-handler500 = "main.views.error500"
