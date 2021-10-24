@@ -86,7 +86,7 @@
 		{% endfor %}
 	{% else %}
 	<div style="text-align: center; margin-top:100px">
-	<img src="{% static 'soempty.png' %}" width="85" style="text-align: center;">
+	<p>Nothing here...</p>
 	{% endif %}
 
 	</div>
@@ -157,9 +157,4 @@
 	</div>
 	</div>
 </div>
-<script>
-$(document).ready(function(){
-    $('[data-toggle="popover"]').popover({html:true});   
-});
-</script>
 {% endblock body %}
