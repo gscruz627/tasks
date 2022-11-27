@@ -51,7 +51,7 @@ def add_category(request):
 	name = request.POST.get("categoryName")
 	
 	if not name:
-		messages.add_message(request, messages.INFO, "Invalid Category Name!, don't leave it blank!")
+		messages.add_message(request, messages.INFO, "Invalid Category Name")
 		return redirect("main:index")
 
 	Category.objects.create(user=user, name=name)
@@ -135,7 +135,6 @@ def mark_task(request, task_id):
 	
 	if task.active:
 		task.active = False
-		print("activet to")
 	
 	else:
 		task.active = True

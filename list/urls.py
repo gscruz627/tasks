@@ -25,6 +25,6 @@ urlpatterns = [
     path('', include("users.urls")),
 ] + static(settings.STATIC_URL)
 
-#EDITS THE 404 AND 500 ERROR PAGES TO OWN ONES
+#ERROR HANDLING VIEWS
 handler404 = "main.views.error404"
 handler500 = "main.views.error500"
